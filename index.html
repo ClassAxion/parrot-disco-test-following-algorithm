@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Parrot Disco Test Following Algorithm</title>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        />
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            #map {
+                width: 100vw;
+                height: 80vh;
+            }
+
+            .debug {
+                width: 100vw;
+                height: 20vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <div class="debug">
+            <strong>Throttle: </strong><span id="throttle">-</span><br />
+            <strong>Roll: </strong><span id="roll">-</span><br />
+        </div>
+
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.js"></script>
+        <script src="data/variables.js"></script>
+        <script src="data/algorithm.js"></script>
+        <script src="assets/map.js"></script>
+        <script>
+            $("#throttle").html(throttle);
+            $("#roll").html(roll);
+        </script>
+    </body>
+</html>
