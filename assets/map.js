@@ -17,9 +17,14 @@ const discoIcon = L.icon({
     iconSize: [50, 50],
 });
 
+const pointerIcon = L.icon({
+    iconUrl: "/assets/pointer.png",
+    iconSize: [50, 50],
+});
+
 const markerA = L.marker([latitudeA, longitudeA], {
     icon: discoIcon,
-    rotationAngle: degressCorrect(directionA - 180),
+    rotationAngle: degressCorrect(directionA),
 })
     .addTo(map)
     .bindPopup(
@@ -33,7 +38,7 @@ markerA._icon.style["transform-origin"] = "50% 50%";
 
 const markerB = L.marker([latitudeB, longitudeB], {
     icon: discoIcon,
-    rotationAngle: degressCorrect(directionB - 180),
+    rotationAngle: degressCorrect(directionB),
 })
     .addTo(map)
     .bindPopup(

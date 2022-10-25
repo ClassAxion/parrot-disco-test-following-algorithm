@@ -17,12 +17,14 @@
 
             #map {
                 width: 100vw;
-                height: 80vh;
+                height: 70vh;
             }
 
             .debug {
+                padding-top: 10px;
+                padding-left: 10px;
                 width: 100vw;
-                height: 20vh;
+                height: 30vh;
             }
         </style>
     </head>
@@ -30,19 +32,28 @@
         <div id="map"></div>
 
         <div class="debug">
-            <strong>Throttle: </strong><span id="throttle">-</span><br />
-            <strong>Roll: </strong><span id="roll">-</span><br />
+            <strong>Throttle: </strong><span id="throttle">-</span>%<br />
+            <strong>Roll: </strong><span id="roll">-</span>%<br /><br />
+            <strong>Distance: </strong><span id="distance">-</span>m<br /><br />
+            <strong>Bearing <small>current</small>: </strong
+            ><span id="bearing-current">-</span>°<br />
+            <strong>Bearing <small>target</small>: </strong
+            ><span id="bearing-target">-</span>°<br />
+            <strong>Direction <small>(turn)</small>: </strong
+            ><span id="direction">-</span><br />
         </div>
+
+        <img
+            src="assets/bearing.png"
+            style="position: absolute; right: 0; bottom: 0; width: 250px"
+        />
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.js"></script>
         <script src="data/variables.js"></script>
+        <script src="data/functions.js"></script>
         <script src="data/algorithm.js"></script>
         <script src="assets/map.js"></script>
-        <script>
-            $("#throttle").html(throttle);
-            $("#roll").html(roll);
-        </script>
     </body>
 </html>
