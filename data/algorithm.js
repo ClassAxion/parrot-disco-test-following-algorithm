@@ -41,8 +41,11 @@ function getRollAxis(currentDirection) {
 let firstThrottleWithLoad = null;
 
 function getThrottle(distance) {
-    if (distance > 100) {
-        // We are too far
+    if (
+        distance >
+        constants.REQUIRED_DISTANCE + constants.REQUIRED_DISTANCE_MARGIN
+    ) {
+        // We are too far, shoud speed up
 
         if (!firstThrottleWithLoad) firstThrottleWithLoad = Date.now();
 
@@ -59,25 +62,42 @@ function getThrottle(distance) {
             return 0;
         }
 
-        return 100; // TODO don't use 100% throttle for too long
-    } else if (
-        distance >
-        constants.REQUIRED_DISTANCE + constants.REQUIRED_DISTANCE_MARGIN
-    ) {
-        // We are too far away, we have to speed up becasue we will fall out of margin
+        return 100;
+    } else if (distance > constants.REQUIRED_DISTANCE) {
+        // We are too far away (but within margin), we have to speed up becasue we will fall out from margin
 
         firstThrottleWithLoad = null;
 
-        return constants.THROTTLE.WITHIN_MARGIN; // TODO dynamic throttle control
+        const throttle = (distance - constants.REQUIRED_DISTANCE).map(
+            0,
+            constants.REQUIRED_DISTANCE_MARGIN,
+            0,
+            50
+        );
+
+        return throttle;
     } else if (
         distance <
         constants.REQUIRED_DISTANCE - constants.REQUIRED_DISTANCE_MARGIN
     ) {
-        // We are too close, we have to slow down becasue we will fall out of margin
+        // We are too too close, we have to slow down becasue we will overtake
 
         firstThrottleWithLoad = null;
 
-        return -constants.THROTTLE.WITHIN_MARGIN; // TODO dynamic throttle control
+        return constants.THROTTLE.MAX_SLOWING;
+    } else if (distance < constants.REQUIRED_DISTANCE) {
+        // We are too close (but within margin), we have to slow down becasue we will slowly overtake
+
+        firstThrottleWithLoad = null;
+
+        const throttle = -Math.abs(distance - constants.REQUIRED_DISTANCE).map(
+            0,
+            constants.REQUIRED_DISTANCE_MARGIN,
+            0,
+            -constants.THROTTLE.MAX_SLOWING
+        );
+
+        return throttle;
     }
 
     firstThrottleWithLoad = null;

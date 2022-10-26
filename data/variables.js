@@ -33,7 +33,7 @@ const constants = {
         MAX: 80, // max roll value when turning [%]
     },
     THROTTLE: {
-        WITHIN_MARGIN: 10, // throttle value when turning inside margin [%]
+        MAX_SLOWING: -50, // max slowing [%]
         MAX_FULL_POWER: 10, // max seconds with full power [s]
         REST: 5, // throttle rest after full power
     },
